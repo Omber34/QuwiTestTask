@@ -26,7 +26,7 @@ void Authentificator::auth(QString const& email, QString const& pass)
 		{
 			QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
 			serverResponse = response.object();
-
+			QString resp = response.toJson();
 			reply->deleteLater();
 			emit authReady();
 		}

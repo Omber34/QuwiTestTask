@@ -1,4 +1,5 @@
 #pragma once
+#include "UserInfo.h"
 #include <qjsonobject.h>
 #include <qmetatype.h>
 #include <qpixmap.h>
@@ -19,6 +20,8 @@ public:
 	QString getTimeAll() const;
 	QString getActiveString() const;
 	int getActive() const;
+
+	QList<UserInfo> getUserList() const;
 
 	QPixmap getLogo() const;
 	

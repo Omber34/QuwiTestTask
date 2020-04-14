@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+/.vs
+/debug
+/release
+/x64
+/x86
+ui_*
+*.vcxproj*
+*.pro.user*

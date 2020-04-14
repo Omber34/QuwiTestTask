@@ -1,5 +1,5 @@
 #pragma once
-#include <qstyleditemdelegate.h>
+#include <QtWidgets/QAbstractItemDelegate>
 class ProjectItemDelegate :
 	public QAbstractItemDelegate
 {

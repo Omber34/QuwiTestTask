@@ -1,5 +1,5 @@
 #pragma once
-#include <qdialog.h>
+#include <QtWidgets/QDialog>
 #include "ui_LoginFormUI.h"
 
 class LoginForm : public QDialog

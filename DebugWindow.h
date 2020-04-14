@@ -1,5 +1,5 @@
 #pragma once
-#include <qmainwindow.h>
+#include <QtWidgets/QMainWindow>
 #include "ui_DebugWindowUI.h"
 
 class DebugWindow :

@@ -1,6 +1,7 @@
 #include "ProjectInfo.h"
 #include "NetworkManager.h"
-#include <qnetworkreply.h>
+#include <QtNetwork/qnetworkreply.h>
+#include <qjsonarray.h>
 #include <qimagereader.h>
 #include "LogoCacher.h"
 
@@ -61,6 +62,15 @@ QString ProjectInfo::getActiveString() const
 int ProjectInfo::getActive() const
 {
 	return jsonProject.value("is_active").toInt();
+}
+
+QList<UserInfo> ProjectInfo::getUserList() const
+{
+	QList<UserInfo> users;
+	QJsonArray usersJson = jsonProject.value("users").toArray();
+	for (auto userJson : usersJson)
+		users.append(UserInfo(userJson.toObject()));
+	return users;
 }
 
 QPixmap ProjectInfo::getLogo() const

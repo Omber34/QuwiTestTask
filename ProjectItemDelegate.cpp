@@ -1,6 +1,6 @@
 #include <qpainter.h>
 #include "ProjectItemDelegate.h"
-#include "ProjectWidget.h"
+#include "ProjectEditDialog.h"
 #include "NetworkManager.h"
 
 ProjectItemDelegate::ProjectItemDelegate(QObject* parent)
@@ -42,27 +42,32 @@ QSize ProjectItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
 
 QWidget* ProjectItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	ProjectWidget* editor = new ProjectWidget(parent);
-
+	ProjectEditDialog* editor = new ProjectEditDialog(parent);
+	editor->setModal(true);
+	connect(editor, &ProjectEditDialog::okClicked, 
+		[this, editor]() mutable
+		{
+			emit const_cast<ProjectItemDelegate*>(this)->commitData(editor);
+		});
 	return editor;
 }
 
-void ProjectItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
+void ProjectItemDelegate::setEditorData(QWidget* _editor, const QModelIndex& index) const
 {
+	ProjectEditDialog* editor = static_cast<ProjectEditDialog*>(_editor);
 	ProjectInfo data = index.data().value<ProjectInfo>();
-	ProjectWidget* projectWidget = static_cast<ProjectWidget*>(editor);
-	projectWidget->setData(data);
+	editor->setData(data);
 }
 
 QJsonObject getDifference(QWidget* editor, QModelIndex const& index)
 {
 	ProjectInfo data = index.data().value<ProjectInfo>();
-	ProjectWidget* projectWidget = static_cast<ProjectWidget*>(editor);
+	ProjectEditDialog* projectWidget = static_cast<ProjectEditDialog*>(editor);
 	QJsonObject difference;
 	if (projectWidget->getName() != data.getName())
 		difference.insert("name", projectWidget->getName());
-	if (projectWidget->getActivity() != data.getActive())
-		difference.insert("is_active", projectWidget->getActivity());
+	if (projectWidget->getActive() != data.getActive())
+		difference.insert("is_active", projectWidget->getActive());
 	return difference;
 }
 
@@ -73,6 +78,7 @@ void ProjectItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mode
 
 void ProjectItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	editor->setGeometry(option.rect);
+	ProjectEditDialog* projectWidget = static_cast<ProjectEditDialog*>(editor);
+	projectWidget->setFixedSize({ 273,172 });
 }
 

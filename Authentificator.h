@@ -1,5 +1,5 @@
 #pragma once
-#include <qnetworkreply.h>
+#include <QtNetwork/qnetworkreply.h>
 #include <qjsonobject.h>
 class Authentificator : public QObject
 {

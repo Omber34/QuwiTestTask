@@ -1,6 +1,6 @@
 #pragma once
-#include <qnetworkaccessmanager.h>
-#include <qnetworkreply.h>
+#include <QtNetwork/qnetworkaccessmanager.h>
+#include <QtNetwork/qnetworkreply.h>
 
 class NetworkManager
 {

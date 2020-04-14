@@ -1,7 +1,7 @@
 #pragma once
-#include <qmainwindow.h>
+#include <QtWidgets/QMainWindow>
 #include "ui_MainWindowUI.h"
-#include <qlistview.h>
+#include <QtWidgets/qlistview.h>
 class MainWindow :
 	public QMainWindow
 {

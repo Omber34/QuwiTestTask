@@ -1,5 +1,5 @@
 #include "Loginer.h"
-#include <qmessagebox.h>
+#include <QtWidgets/qmessagebox.h>
 
 Loginer::Loginer(QWidget* widgetParent, QObject* objectParent )
 	: loginForm(widgetParent),
